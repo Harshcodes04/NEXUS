@@ -105,7 +105,6 @@
 
       <!-- PROJECTION MODE VIEW - Full Page Map -->
       <div id="projection-view" class="view-container active">
-        <!-- Map View (3D Globe or 2D Mercator) - Full Page -->
         <div id="map-panel" class="panel glass-panel full-page-map">
           <div class="panel-content">
             <div id="cesium-container" style="display: none;"></div>
@@ -125,12 +124,12 @@
 
       <!-- CHARTS MODE VIEW -->
       <div id="charts-view" class="view-container">
-        <div id="charts-main" style="display: flex; height: 100%; gap: 12px;">
+        <div id="charts-main">
           
           <!-- MAIN SPEC FEATURES -->
-          <div id="charts-spec" style="flex: 1; display: flex; flex-direction: column; gap: 12px;">
+          <div id="charts-spec">
             <!-- ROW 1: Bullseye + Fuel -->
-            <div id="chart-row-1" class="split-horizontal" style="flex: 1;">
+            <div id="chart-row-1" class="split-horizontal">
               <!-- Conjunction Bullseye -->
               <div id="bullseye-panel" class="panel glass-panel">
                 <div class="panel-content">
@@ -160,7 +159,7 @@
             </div>
 
             <!-- ROW 2: Gantt + Telemetry -->
-            <div id="chart-row-2" class="split-horizontal" style="flex: 1;">
+            <div id="chart-row-2" class="split-horizontal">
               <!-- Maneuver Gantt -->
               <div id="gantt-panel" class="panel glass-panel">
                 <div class="panel-content">
@@ -200,8 +199,8 @@
             </div>
           </div>
 
-          <!-- COLLAPSIBLE SIDEBAR: Extra Features -->
-          <div id="extras-sidebar" class="panel glass-panel" style="width: 280px; flex-shrink: 0;">
+          <!-- RESIZABLE SIDEBAR: Extra Features -->
+          <div id="extras-sidebar" class="panel glass-panel">
             <div class="panel-content">
               <div class="extras-header" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
                 <div class="panel-title" style="font-size: 11px;">

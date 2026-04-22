@@ -122,7 +122,88 @@ html, body {
   overflow: hidden;
 }
 
-/* ── Split.js Row Containers ───────────────────────────────────────────── */
+/* ── View Containers — Fill all available main-content space ───────────── */
+.view-container {
+  display: none;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.view-container.active {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Projection view — map fills everything */
+#projection-view {
+  flex: 1;
+  min-height: 0;
+}
+
+.full-page-map {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.full-page-map .panel-content {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Charts view layout */
+#charts-main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+#charts-spec {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+#chart-row-1,
+#chart-row-2 {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+#extras-sidebar {
+  min-width: 180px;
+  max-width: 500px;
+  overflow: hidden;
+}
+
+/* Analytics view */
+#analytics-view {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+#analytics-view.active {
+  display: flex;
+}
+
 #upper-row {
   display: flex;
   flex-direction: row;

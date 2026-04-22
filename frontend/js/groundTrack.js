@@ -35,33 +35,39 @@ const GroundTrack = (() => {
 
     _measure(container);
 
-    // Canvas layer (underneath    // Canvas for debris rendering
+    // Canvas for debris rendering
     canvas = document.getElementById('debris-canvas');
     if (canvas) {
-      canvas.width = width;
+      canvas.width  = width;
       canvas.height = height;
       ctx = canvas.getContext('2d');
-      console.log('[Canvas] Canvas initialized:', width, 'x', height);
-      console.log('[Canvas] Canvas element:', canvas);
-      console.log('[Canvas] Canvas style:', canvas.style.cssText);
-    } else {
-      console.error('[Canvas] Debris canvas element not found!');
     }
 
     // SVG setup
     svg = d3.select('#groundtrack-svg')
-      .attr('width', width)
+      .attr('width',  width)
       .attr('height', height)
       .style('position', 'absolute')
-      .style('top', '0')
+      .style('top',  '0')
       .style('left', '0');
 
     g = svg.append('g');
 
     _drawBackground();
     _drawGraticule();
-    _loadWorld();     // async — draws countries when ready
+    _loadWorld();
     _drawStaticLines();
+
+    // Auto-resize when the container changes size (Split.js, window resize, etc.)
+    if (typeof ResizeObserver !== 'undefined') {
+      const ro = new ResizeObserver(() => {
+        const newRect = container.getBoundingClientRect();
+        if (Math.abs(newRect.width - width) > 2 || Math.abs(newRect.height - height) > 2) {
+          resize();
+        }
+      });
+      ro.observe(container);
+    }
   }
 
   function _measure(container) {
