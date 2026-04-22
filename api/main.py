@@ -28,6 +28,7 @@ from .routers.analytics_api import router as analytics_router
 from .routers.heatmap_api import router as heatmap_router
 from .routers.tle_api import router as tle_router
 from .routers.designer_api import router as designer_router
+from .routers.coverage_api import router as coverage_router
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -122,6 +123,7 @@ app.include_router(analytics_router)
 app.include_router(heatmap_router)
 app.include_router(tle_router)
 app.include_router(designer_router)
+app.include_router(coverage_router)
 
 
 # ═══════════════════════════════════════════════════════════════════════════

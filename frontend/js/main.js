@@ -65,6 +65,7 @@
     if (typeof Heatmap      !== 'undefined') Heatmap.init();
     if (typeof TLEImport    !== 'undefined') TLEImport.init();
     if (typeof Designer     !== 'undefined') Designer.init();
+    if (typeof Coverage     !== 'undefined') Coverage.init();
 
     // Wire up events
     setupEventListeners();
