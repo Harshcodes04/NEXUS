@@ -1,14 +1,63 @@
-node_modules/
-backend/cpp/build/
-*.pyc
+# ── Python ────────────────────────────────────────────────────────────────────
 __pycache__/
-*.log
-.env
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+venv/
+.venv/
+env/
+.Python
 
-# Temp output files
+# ── Node ──────────────────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ── Environment ───────────────────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ── Database (runtime, not schema) ────────────────────────────────────────────
+api/data/analytics.db
+api/data/mission.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+logs/
+server.log
 node_err.txt
 node_out.txt
-server.log
 test_out.txt
 err.txt
 pull_out.txt
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+desktop.ini
+
+# ── Editor ────────────────────────────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Build artifacts ───────────────────────────────────────────────────────────
+backend/cpp/build/
+*.pyc
+dist/
+*.min.js.map
