@@ -181,40 +181,42 @@ html, body {
 
 /* Split.js Gutter (Drag Handle) Styles */
 .gutter {
-  background: var(--bg-void);
+  background: #1e232b;
   position: relative;
   flex-shrink: 0;
   z-index: 50;
-  transition: background 0.3s ease;
+  transition: background 0.2s ease;
 }
 
 .gutter:hover {
-  background: var(--border-glow);
+  background: #2a3040;
 }
 
 .gutter:active {
-  background: var(--blue);
+  background: rgba(88, 166, 255, 0.15);
 }
 
 .gutter.gutter-horizontal {
   cursor: col-resize;
-  width: 4px;
+  width: 5px;
 }
 
 .gutter.gutter-vertical {
   cursor: row-resize;
-  height: 4px;
+  height: 5px;
 }
 
-/* Gutter glow line on hover */
+/* Blue glow line on hover */
 .gutter::after {
   content: '';
   position: absolute;
-  transition: all 0.3s ease;
+  transition: opacity 0.2s ease;
   opacity: 0;
+  background: var(--blue);
 }
 
-.gutter:hover::after {
+.gutter:hover::after,
+.gutter:active::after {
   opacity: 1;
 }
 
@@ -224,8 +226,6 @@ html, body {
   left: 50%;
   width: 1px;
   transform: translateX(-50%);
-  background: var(--blue);
-  box-shadow: none;
 }
 
 .gutter.gutter-vertical::after {
@@ -234,21 +234,20 @@ html, body {
   top: 50%;
   height: 1px;
   transform: translateY(-50%);
-  background: var(--blue);
-  box-shadow: none;
 }
 
-/* Grip dots on gutter */
+/* Grip dots */
 .gutter.gutter-horizontal::before {
   content: '⋮';
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: var(--text-dim);
-  font-size: 10px;
+  color: #6e7681;
+  font-size: 12px;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
 }
 
 .gutter.gutter-vertical::before {
@@ -257,10 +256,11 @@ html, body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: var(--text-dim);
-  font-size: 10px;
+  color: #6e7681;
+  font-size: 12px;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
 }
 
 .gutter:hover::before {

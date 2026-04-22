@@ -63,12 +63,15 @@ const ViewMode = (() => {
     // Trigger resize events for charts
     setTimeout(() => {
       window.dispatchEvent(new Event('resize'));
-      
+
       if (mode === 'charts' && typeof Bullseye !== 'undefined') Bullseye.resize();
       if (typeof Gantt !== 'undefined') Gantt.resize();
       if (typeof Telemetry !== 'undefined') Telemetry.init();
       if (typeof Fuel !== 'undefined') Fuel.init();
       if (mode === 'analytics' && typeof Analytics !== 'undefined') Analytics.resize();
+
+      // Notify ResizeManager so Split.js panels redraw their contents
+      if (typeof ResizeManager !== 'undefined') ResizeManager.onViewChange(mode);
     }, 100);
     
     currentMode = mode;
