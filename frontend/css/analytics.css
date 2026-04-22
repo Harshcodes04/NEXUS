@@ -1,0 +1,513 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   ACM — analytics.css
+   Mission Analytics Dashboard — Historical Data Visualization
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Analytics View Container ────────────────────────────────────────────── */
+#analytics-view {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-void);
+}
+
+/* ── Analytics Top Strip: KPI Cards ─────────────────────────────────────── */
+#analytics-kpi-strip {
+  display: flex;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-dim);
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+
+.analytics-kpi-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-dim);
+  min-width: 120px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+
+.analytics-kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--blue);
+  opacity: 0.6;
+}
+
+.analytics-kpi-card.kpi-green::before  { background: var(--green); }
+.analytics-kpi-card.kpi-amber::before  { background: var(--amber); }
+.analytics-kpi-card.kpi-red::before    { background: var(--red); }
+.analytics-kpi-card.kpi-purple::before { background: var(--purple); }
+.analytics-kpi-card.kpi-teal::before   { background: var(--teal); }
+
+.analytics-kpi-card:hover {
+  border-color: var(--blue);
+}
+
+.kpi-label {
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.kpi-value {
+  font-size: 22px;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.kpi-sub {
+  font-size: 9px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 2px;
+}
+
+/* ── Analytics Main Grid ─────────────────────────────────────────────────── */
+#analytics-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 8px;
+  padding: 8px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ── Individual Analytics Panels ─────────────────────────────────────────── */
+.analytics-panel {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-dim);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+
+.analytics-panel:hover {
+  border-color: rgba(88, 166, 255, 0.25);
+}
+
+.analytics-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--border-dim);
+  flex-shrink: 0;
+}
+
+.analytics-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.analytics-panel-title i {
+  width: 11px;
+  height: 11px;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+
+.analytics-panel-badge {
+  font-size: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim);
+  background: var(--bg-secondary);
+  padding: 2px 6px;
+  border: 1px solid var(--border-dim);
+}
+
+.analytics-panel-body {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+  padding: 8px;
+}
+
+/* Span 2 columns for wide panels */
+.analytics-panel.span-2 {
+  grid-column: span 2;
+}
+
+/* ── D3 Chart Containers ─────────────────────────────────────────────────── */
+.analytics-svg-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.analytics-svg-container svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* ── D3 Axis Styling ─────────────────────────────────────────────────────── */
+.analytics-panel .axis text {
+  fill: var(--text-dim);
+  font-size: 9px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.analytics-panel .axis line,
+.analytics-panel .axis path {
+  stroke: var(--border-dim);
+  stroke-width: 1;
+}
+
+.analytics-panel .grid line {
+  stroke: var(--border-dim);
+  stroke-opacity: 0.3;
+  stroke-dasharray: 2,4;
+}
+
+.analytics-panel .grid path {
+  stroke: none;
+}
+
+/* ── CDM Timeline Bars ────────────────────────────────────────────────────── */
+.cdm-bar {
+  fill: var(--blue);
+  opacity: 0.7;
+  transition: opacity 0.15s;
+}
+.cdm-bar:hover { opacity: 1; }
+.cdm-bar.critical { fill: var(--red); }
+
+/* ── Fuel Line Chart ──────────────────────────────────────────────────────── */
+.fuel-line {
+  fill: none;
+  stroke-width: 1.5;
+  opacity: 0.85;
+}
+
+.fuel-area {
+  opacity: 0.08;
+}
+
+/* ── Per-Satellite Bar Chart ──────────────────────────────────────────────── */
+.sat-bar-cdm  { fill: var(--blue); }
+.sat-bar-burn { fill: var(--amber); }
+.sat-bar-dv   { fill: var(--teal); }
+
+.sat-bar-cdm:hover,
+.sat-bar-burn:hover,
+.sat-bar-dv:hover { opacity: 0.85; }
+
+/* ── Maneuver Scatter ────────────────────────────────────────────────────── */
+.maneuver-dot {
+  opacity: 0.75;
+  transition: r 0.15s, opacity 0.15s;
+  cursor: pointer;
+}
+.maneuver-dot:hover {
+  opacity: 1;
+}
+
+/* ── Alert Log List ──────────────────────────────────────────────────────── */
+#analytics-alert-log {
+  overflow-y: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.analytics-alert-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 5px 8px;
+  background: var(--bg-secondary);
+  border-left: 2px solid transparent;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.analytics-alert-item.level-CRITICAL { border-left-color: var(--red); }
+.analytics-alert-item.level-WARNING  { border-left-color: var(--amber); }
+.analytics-alert-item.level-INFO     { border-left-color: var(--blue); }
+
+.analytics-alert-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+  min-width: 130px;
+}
+
+.analytics-alert-msg {
+  color: var(--text-primary);
+  font-size: 10px;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.analytics-alert-sat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+
+/* ── Satellite Lifetime Table ────────────────────────────────────────────── */
+#analytics-sat-table {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.analytics-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.analytics-table th {
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding: 4px 8px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-dim);
+  background: var(--bg-primary);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.analytics-table td {
+  padding: 5px 8px;
+  border-bottom: 1px solid rgba(48, 54, 61, 0.5);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.analytics-table tr:hover td {
+  background: var(--bg-secondary);
+}
+
+.analytics-table td.col-id {
+  color: var(--blue);
+  font-weight: 500;
+}
+
+.analytics-table td.col-num {
+  text-align: right;
+  color: var(--text-secondary);
+}
+
+.analytics-table td.col-crit {
+  color: var(--red);
+  text-align: right;
+}
+
+/* ── Satellite Selector (Fuel Timeline) ─────────────────────────────────── */
+#analytics-sat-select {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-dim);
+  color: var(--text-primary);
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 3px 8px;
+  cursor: pointer;
+  outline: none;
+}
+
+#analytics-sat-select:focus {
+  border-color: var(--blue);
+}
+
+#analytics-sat-select option {
+  background: var(--bg-secondary);
+}
+
+/* ── D3 Tooltip ──────────────────────────────────────────────────────────── */
+#analytics-tooltip {
+  position: fixed;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-dim);
+  padding: 6px 10px;
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-primary);
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.15s;
+  max-width: 220px;
+}
+
+#analytics-tooltip.visible {
+  opacity: 1;
+}
+
+#analytics-tooltip .tt-title {
+  font-size: 9px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+#analytics-tooltip .tt-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 2px;
+}
+
+#analytics-tooltip .tt-label {
+  color: var(--text-dim);
+}
+
+#analytics-tooltip .tt-val {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* ── Empty State ─────────────────────────────────────────────────────────── */
+.analytics-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 8px;
+  color: var(--text-dim);
+}
+
+.analytics-empty i {
+  width: 24px;
+  height: 24px;
+  opacity: 0.3;
+}
+
+.analytics-empty p {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── Loading Spinner ─────────────────────────────────────────────────────── */
+@keyframes analytics-spin {
+  to { transform: rotate(360deg); }
+}
+
+.analytics-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 8px;
+  color: var(--text-dim);
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.analytics-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--border-dim);
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: analytics-spin 0.8s linear infinite;
+}
+
+/* ── Refresh button ──────────────────────────────────────────────────────── */
+#analytics-refresh-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: 1px solid var(--border-dim);
+  color: var(--text-secondary);
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  transition: all 0.2s ease;
+}
+
+#analytics-refresh-btn:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+#analytics-refresh-btn i {
+  width: 10px;
+  height: 10px;
+}
+
+#analytics-refresh-btn.loading i {
+  animation: analytics-spin 0.8s linear infinite;
+}
+
+/* ── Topbar Analytics Tab Additions ─────────────────────────────────────── */
+#mode-analytics {
+  /* inherits .view-toggle-btn from panels.css */
+}
+
+/* ── Legend ──────────────────────────────────────────────────────────────── */
+.analytics-legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 9px;
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-line {
+  width: 16px;
+  height: 2px;
+  flex-shrink: 0;
+}

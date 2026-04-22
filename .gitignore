@@ -1,0 +1,14 @@
+node_modules/
+backend/cpp/build/
+*.pyc
+__pycache__/
+*.log
+.env
+
+# Temp output files
+node_err.txt
+node_out.txt
+server.log
+test_out.txt
+err.txt
+pull_out.txt
