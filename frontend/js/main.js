@@ -52,15 +52,15 @@
   // Init all modules
   setTimeout(() => {
     if (typeof Globe !== 'undefined') Globe.init();
-    GroundTrack.init();
-    FuelPanel.init();
-    Bullseye.init();
-    Gantt.init();
-    Telemetry.init();
-    SpeedControl.init();
-    Alerts.init();
-    Drawer.init();
-    ViewMode.init();
+    if (typeof GroundTrack !== 'undefined') GroundTrack.init();
+    if (typeof FuelPanel !== 'undefined') FuelPanel.init();
+    if (typeof Bullseye !== 'undefined') Bullseye.init();
+    if (typeof Gantt !== 'undefined') Gantt.init();
+    if (typeof Telemetry !== 'undefined') Telemetry.init();
+    if (typeof SpeedControl !== 'undefined') SpeedControl.init();
+    if (typeof Alerts !== 'undefined') Alerts.init();
+    if (typeof Drawer !== 'undefined') Drawer.init();
+    if (typeof ViewMode !== 'undefined') ViewMode.init();
     if (typeof CommandCenter !== 'undefined') CommandCenter.init();
     if (typeof Analytics    !== 'undefined') Analytics.init();
     if (typeof Heatmap      !== 'undefined') Heatmap.init();
@@ -216,10 +216,10 @@
   // RESIZE HANDLER
   // ══════════════════════════════════════════════════════════════════════════
   function handleResize() {
-    Bullseye.resize();
-    Gantt.resize();
-    if (cdmCache.length) {
-      Globe.resize();
+    if (typeof Bullseye !== 'undefined') Bullseye.resize();
+    if (typeof Gantt !== 'undefined') Gantt.resize();
+    if (cdmCache.length && typeof Globe !== 'undefined') {
+      if (typeof Globe.resize === 'function') Globe.resize();
     }
   }
 
@@ -236,7 +236,7 @@
       // Real data from /api/constellation/stats
       const realDvMs = stats.maneuvers?.total_dv_ms || 0;
       AppState.addDvDataPoint(realDvMs);
-      Telemetry.updateDvChart(AppState.state.dvHistory);
+      if (typeof Telemetry !== 'undefined') Telemetry.updateDvChart(AppState.state.dvHistory);
 
       const totalEl = document.getElementById('dv-total');
       if (totalEl) totalEl.textContent = realDvMs.toFixed(2) + ' m/s';
@@ -436,8 +436,8 @@
       }
 
       const satCDMs = AppState.getCDMsForSatellite(satId);
-      Bullseye.update(satCDMs.length > 0 ? satCDMs : cdmCache, simTimestamp);
-      FuelPanel.update(AppState.state.satellites);
+      if (typeof Bullseye !== 'undefined') Bullseye.update(satCDMs.length > 0 ? satCDMs : cdmCache, simTimestamp);
+      if (typeof FuelPanel !== 'undefined') FuelPanel.update(AppState.state.satellites);
     });
 
     document.querySelectorAll('.context-menu-item').forEach(item => {
@@ -496,11 +496,11 @@
   // RESIZE HANDLER
   // ══════════════════════════════════════════════════════════════════════════
   function handleResize() {
-    Bullseye.resize();
-    Gantt.resize();
+    if (typeof Bullseye !== 'undefined') Bullseye.resize();
+    if (typeof Gantt !== 'undefined') Gantt.resize();
     if (cdmCache.length) {
-      Bullseye.update(cdmCache, simTimestamp);
-      Gantt.update(maneuverCache, simTimestamp);
+      if (typeof Bullseye !== 'undefined') Bullseye.update(cdmCache, simTimestamp);
+      if (typeof Gantt !== 'undefined') Gantt.update(maneuverCache, simTimestamp);
     }
   }
 
