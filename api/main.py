@@ -475,3 +475,8 @@ if os.path.isdir(_frontend_dir):
     async def serve_dashboard():
         """Serve the main dashboard HTML."""
         return FileResponse(os.path.join(_frontend_dir, "index.html"))
+
+    @app.get("/globe.html")
+    async def serve_globe():
+        """Serve the 3D Globe HTML."""
+        return FileResponse(os.path.join(_frontend_dir, "globe.html"))

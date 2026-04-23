@@ -27,6 +27,13 @@ const ViewMode = (() => {
     if (typeof lucide !== 'undefined') {
       lucide.createIcons();
     }
+
+    // Parse URL parameters for direct linking
+    const urlParams = new URLSearchParams(window.location.search);
+    const mode = urlParams.get('mode');
+    if (mode && ['projection', 'charts', 'analytics'].includes(mode)) {
+      setTimeout(() => switchMode(mode), 50);
+    }
   }
   
   function switchMode(mode) {

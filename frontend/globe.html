@@ -10,9 +10,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500;600&family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- CesiumJS (3D Globe) - DISABLED for performance -->
-  <!-- <script src="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Cesium.js"></script>
-  <link href="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Widgets/widgets.css" rel="stylesheet"> -->
+  <!-- CesiumJS (3D Globe) -->
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Cesium.js"></script>
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
   <!-- D3 / GSAP / Split.js / Lucide / TopoJSON -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -63,19 +63,19 @@
 
       <div class="topbar-right">
         <div class="view-toggle-group">
-          <button id="mode-projection" class="view-toggle-btn active">
+          <a href="/" class="view-toggle-btn" style="text-decoration: none;">
             <i data-lucide="globe"></i>
             <span>Projection</span>
-          </button>
-          <button id="mode-charts" class="view-toggle-btn">
+          </a>
+          <a href="/?mode=charts" class="view-toggle-btn" style="text-decoration: none;">
             <i data-lucide="bar-chart-2"></i>
             <span>Charts</span>
-          </button>
-          <button id="mode-analytics" class="view-toggle-btn">
+          </a>
+          <a href="/?mode=analytics" class="view-toggle-btn" style="text-decoration: none;">
             <i data-lucide="database"></i>
             <span>Analytics</span>
-          </button>
-          <a href="/globe.html" class="view-toggle-btn" style="text-decoration: none;">
+          </a>
+          <a href="/globe.html" class="view-toggle-btn active" style="text-decoration: none;">
             <i data-lucide="box"></i>
             <span>3D Globe</span>
           </a>
@@ -111,8 +111,8 @@
       <div id="projection-view" class="view-container active">
         <div id="map-panel" class="panel glass-panel full-page-map">
           <div class="panel-content">
-            <div id="cesium-container" style="display: none;"></div>
-            <div id="groundtrack-svg-container" style="position:relative;width:100%;height:100%;">
+            <div id="cesium-container" style="display: block; width: 100%; height: 100%; position: absolute; top: 0; left: 0;"></div>
+            <div id="groundtrack-svg-container" style="display:none;position:relative;width:100%;height:100%;">
               <canvas id="debris-canvas" style="position:absolute;top:0;left:0;pointer-events:none;z-index:1;"></canvas>
               <svg id="groundtrack-svg" style="position:absolute;top:0;left:0;z-index:2;"></svg>
             </div>
@@ -363,8 +363,8 @@
   <script src="js/state.js?v=5"></script>
   <script src="js/api.js?v=5"></script>
   <script src="js/ws_telemetry.js?v=5"></script>
-  <!-- globe.js disabled - Cesium removed for performance -->
-  <!-- <script src="js/globe.js?v=5"></script> -->
+  <!-- globe.js enabled -->
+  <script src="js/globe.js?v=5"></script>
   <script src="js/groundTrack.js?v=5"></script>
   <script src="js/bullseye.js?v=5"></script>
   <script src="js/fuel.js?v=5"></script>

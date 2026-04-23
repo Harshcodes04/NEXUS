@@ -62,9 +62,7 @@ const Globe = (() => {
       sceneModePicker: false,
       selectionIndicator: false,
       navigationHelpButton: false,
-      imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
-        url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer'
-      }),
+      // imageryProvider: new Cesium.ArcGisMapServerImageryProvider({ ... }) - removed to fallback to default
       navigationInstructionsInitiallyVisible: false,
       creditContainer: document.createElement('div'),
       skyBox: new Cesium.SkyBox({

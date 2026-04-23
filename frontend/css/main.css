@@ -1,39 +1,57 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   NEXUS — Main Design System
-   Mission Control Dashboard CSS Foundation
+   NEXUS — Main Design System  v3.1
+   Premium Mission Control Dashboard
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ── Design Tokens ──────────────────────────────────────────────────────── */
 :root {
-  /* Backgrounds */
-  --bg-void:        #0d1117; /* Space Gray Void */
-  --bg-primary:     #161b22; /* Panel background */
-  --bg-secondary:   #21262d; /* Alternate background */
-  --bg-tertiary:    #30363d; /* Hover background */
-  --border-dim:     #30363d; /* Professional borders */
-  --border-glow:    #30363d; /* Glow removed */
+  /* Backgrounds — deep space gradient palette */
+  --bg-void:        #080c12;
+  --bg-primary:     #0d1520;
+  --bg-secondary:   #111d2e;
+  --bg-tertiary:    #162236;
+  --bg-panel:       rgba(13, 21, 32, 0.92);
+
+  /* Borders */
+  --border-dim:     rgba(56, 139, 253, 0.12);
+  --border-mid:     rgba(56, 139, 253, 0.22);
+  --border-bright:  rgba(56, 139, 253, 0.5);
 
   /* Text */
-  --text-primary:   #e6edf3;
-  --text-secondary: #8b949e;
-  --text-dim:       #6e7681;
+  --text-primary:   #e2ecf8;
+  --text-secondary: #7d9ec0;
+  --text-dim:       #4a6480;
 
-  /* Status Colors */
-  --blue:           #58a6ff;
-  --blue-glow:      transparent;
-  --green:          #3fb950;
-  --green-glow:     transparent;
-  --amber:          #d29922;
-  --amber-glow:     transparent;
+  /* Brand / Accent */
+  --blue:           #4da3ff;
+  --blue-dim:       rgba(77, 163, 255, 0.12);
+  --blue-glow:      0 0 12px rgba(77, 163, 255, 0.35);
+
+  --green:          #2dca72;
+  --green-dim:      rgba(45, 202, 114, 0.12);
+  --green-glow:     0 0 10px rgba(45, 202, 114, 0.3);
+
+  --amber:          #f0a429;
+  --amber-dim:      rgba(240, 164, 41, 0.12);
+  --amber-glow:     0 0 10px rgba(240, 164, 41, 0.3);
+
   --red:            #f85149;
-  --red-glow:       transparent;
-  --purple:         #bc8cff;
-  --teal:           #39c5cf;
+  --red-dim:        rgba(248, 81, 73, 0.12);
+  --red-glow:       0 0 10px rgba(248, 81, 73, 0.3);
+
+  --purple:         #c084fc;
+  --purple-dim:     rgba(192, 132, 252, 0.12);
+  --purple-glow:    0 0 10px rgba(192, 132, 252, 0.3);
+
+  --teal:           #22d3ee;
+  --teal-dim:       rgba(34, 211, 238, 0.1);
 
   /* Spacing */
-  --gap:            4px;
-  --panel-pad:      16px;
+  --gap:            3px;
+  --panel-pad:      14px;
+  --radius:         6px;
 }
+
 
 /* ── Global Reset ───────────────────────────────────────────────────────── */
 *, *::before, *::after {
@@ -46,49 +64,21 @@ html, body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  font-family: 'Inter', 'JetBrains Mono', monospace;
+  font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 400;
   color: var(--text-primary);
-  background: var(--bg-void);
+  background: radial-gradient(ellipse at 20% 10%, #0d1e35 0%, #080c12 60%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── Scrollbar Styling ──────────────────────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-void);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--border-dim);
-  border-radius: 0;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--border-glow);
-}
+/* ── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--blue); }
 
-/* ── Scanline CRT Overlay — DISABLED for performance ──────────────────── */
-#scanline-overlay {
-  display: none;
-}
-
-/* ── Holographic Scan Line — DISABLED for performance ─────────────────── */
-#holo-scan {
-  display: none;
-}
-
-#holo-scan::after {
-  display: none;
-}
-
-/* ── Particle Background Canvas — DISABLED for performance ───────────── */
-#particle-canvas {
-  display: none;
-}
 
 /* ── Main Grid Layout ───────────────────────────────────────────────────── */
 #app {
@@ -350,32 +340,19 @@ html, body {
 
 /* ── Panel Base ─────────────────────────────────────────────────────────── */
 .panel {
-  background: var(--bg-primary);
+  background: var(--bg-panel);
   border: 1px solid var(--border-dim);
+  border-radius: var(--radius);
   position: relative;
   overflow: hidden;
   min-width: 0;
   min-height: 0;
-  transition: border-color 0.5s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(12px);
 }
 
-/* Grid texture - subtle only */
-.panel::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0;
-}
-
-/* Subtle active border flash on data update - DISABLED to prevent flickering */
-.panel::after {
-  display: none;
-}
-
-.panel.data-flash::after {
-  display: none;
+.panel:hover {
+  border-color: var(--border-mid);
 }
 
 .panel-content {
@@ -386,43 +363,27 @@ html, body {
   overflow: hidden;
 }
 
-/* ── Typography ─────────────────────────────────────────────────────────── */
-.label {
-  font-size: 9px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--text-secondary);
-  font-weight: 400;
-}
-
-.value {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.value-lg {
-  font-size: 24px;
-  font-weight: 600;
-}
-
 .panel-title {
-  font-size: 10px;
-  letter-spacing: 2px;
+  font-size: 9px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--text-secondary);
-  padding: 8px var(--panel-pad);
+  color: var(--text-dim);
+  padding: 10px var(--panel-pad);
   border-bottom: 1px solid var(--border-dim);
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
 }
 
 .panel-title i {
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   color: var(--blue);
+  flex-shrink: 0;
 }
+
 
 /* ── Text Color Utilities ───────────────────────────────────────────────── */
 .text-blue   { color: var(--blue); }

@@ -52,187 +52,195 @@
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
-   TOP BAR
+   TOP BAR — Premium Mission Control Header
    ════════════════════════════════════════════════════════════════════════════ */
 #topbar {
-  background: var(--bg-secondary);
+  background: rgba(8, 12, 18, 0.95);
   border-bottom: 1px solid var(--border-dim);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
-  gap: 16px;
+  padding: 0 16px;
+  gap: 12px;
   z-index: 100;
   position: relative;
+  backdrop-filter: blur(20px);
 }
 
-#topbar::before {
+/* Subtle gradient top-line accent */
+#topbar::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   height: 1px;
   background: linear-gradient(90deg,
-    transparent 10%,
-    rgba(74, 158, 255, 0.2) 30%,
-    rgba(74, 158, 255, 0.35) 50%,
-    rgba(74, 158, 255, 0.2) 70%,
-    transparent 90%
+    transparent 0%,
+    var(--blue) 30%,
+    rgba(77, 163, 255, 0.8) 50%,
+    var(--blue) 70%,
+    transparent 100%
   );
+  opacity: 0.4;
 }
 
 .topbar-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   flex-shrink: 0;
 }
 
+/* NEXUS logo — glowing wordmark */
 .topbar-logo {
   font-family: 'Orbitron', monospace;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
-  letter-spacing: 2px;
-  color: var(--text-primary);
+  letter-spacing: 5px;
+  background: linear-gradient(135deg, #4da3ff 0%, #7ec8ff 50%, #4da3ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-transform: uppercase;
+  filter: drop-shadow(0 0 8px rgba(77,163,255,0.4));
 }
 
-.topbar-separator {
-  color: var(--text-dim);
-  font-size: 14px;
-}
-
-.topbar-mission {
+/* Live sim clock */
+.sim-clock {
+  font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
+  font-weight: 500;
   color: var(--text-secondary);
   letter-spacing: 1px;
-}
-
-.topbar-center {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-}
-
-.sim-clock {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-primary);
-  letter-spacing: 0.5px;
   font-variant-numeric: tabular-nums;
+  padding: 4px 10px;
+  background: var(--blue-dim);
+  border: 1px solid var(--border-dim);
+  border-radius: 3px;
 }
 
 .topbar-right {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-shrink: 0;
-  overflow-x: auto;
 }
 
 /* ── View Toggle Group ───────────────────────────────────────────────────── */
 .view-toggle-group {
   display: flex;
-  gap: 4px;
-  padding-right: 12px;
-  border-right: 1px solid var(--border-dim);
+  gap: 2px;
+  padding: 3px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-dim);
+  border-radius: 6px;
+  margin-right: 6px;
 }
 
 .view-toggle-btn {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-dim);
-  color: var(--text-secondary);
-  font-size: 11px;
+  gap: 5px;
+  padding: 5px 12px;
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 10px;
+  letter-spacing: 0.8px;
   cursor: pointer;
-  border-radius: 3px;
+  border-radius: 4px;
   transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
 }
 
 .view-toggle-btn:hover {
-  border-color: var(--blue);
-  color: var(--blue);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
 }
 
 .view-toggle-btn.active {
   background: var(--blue);
-  border-color: var(--blue);
   color: #fff;
+  box-shadow: 0 0 10px rgba(77, 163, 255, 0.3);
 }
 
-.view-toggle-btn i {
-  width: 12px;
-  height: 12px;
-}
+.view-toggle-btn i { width: 11px; height: 11px; }
 
-/* ── Map Toggle Group ────────────────────────────────────────────────────── */
-.map-toggle-group {
+/* ── Topbar action buttons (COMMAND, TLE, DESIGN) ───────────────────────── */
+#cmd-open-btn,
+#tle-open-btn,
+#designer-open-btn {
   display: flex;
-  gap: 2px;
-  padding-right: 12px;
-  border-right: 1px solid var(--border-dim);
-}
-
-.map-toggle-btn {
-  padding: 4px 10px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-dim);
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: 1px solid var(--border-mid);
   color: var(--text-secondary);
-  font-size: 11px;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 6px 12px;
   cursor: pointer;
-  border-radius: 3px;
   transition: all 0.2s ease;
+  border-radius: 4px;
 }
 
-.map-toggle-btn:hover {
+#cmd-open-btn:hover, #cmd-open-btn.active {
   border-color: var(--blue);
   color: var(--blue);
+  background: var(--blue-dim);
+  box-shadow: var(--blue-glow);
 }
 
-.map-toggle-btn.active {
-  background: var(--blue);
-  border-color: var(--blue);
-  color: #fff;
+#tle-open-btn:hover, #tle-open-btn.active {
+  border-color: var(--teal);
+  color: var(--teal);
+  background: var(--teal-dim);
 }
 
-/* ── Stat Chips — Frosted glass micro-cards ──────────────────────────────── */
+#designer-open-btn:hover, #designer-open-btn.active {
+  border-color: var(--purple);
+  color: var(--purple);
+  background: var(--purple-dim);
+  box-shadow: var(--purple-glow);
+}
+
+/* ── Stat Chips ──────────────────────────────────────────────────────────── */
 .stat-chip {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5px 12px;
-  border: 1px solid transparent;
-  background: var(--bg-secondary);
-  min-width: 80px;
+  padding: 4px 14px;
+  border: 1px solid var(--border-dim);
+  background: rgba(13, 21, 32, 0.7);
+  min-width: 72px;
   border-radius: 4px;
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
   cursor: default;
 }
 
 .stat-chip:hover {
-  border-color: var(--border-dim);
-  background: var(--bg-secondary);
-  box-shadow: none;
+  border-color: var(--border-mid);
 }
 
 .stat-chip .label {
-  font-size: 10px;
-  letter-spacing: 1.2px;
+  font-size: 7px;
+  letter-spacing: 1.5px;
   white-space: nowrap;
-  color: var(--text-secondary);
+  color: var(--text-dim);
   text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .stat-chip .value {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.1;
 }
+
+
 
 /* ════════════════════════════════════════════════════════════════════════════
    GROUND TRACK PANEL (2D Mercator)

@@ -51,6 +51,7 @@
 
   // Init all modules
   setTimeout(() => {
+    if (typeof Globe !== 'undefined') Globe.init();
     GroundTrack.init();
     FuelPanel.init();
     Bullseye.init();
